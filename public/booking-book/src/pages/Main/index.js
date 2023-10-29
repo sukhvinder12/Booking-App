@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 import {
-    Layout, Menu, Breadcrumb, Row, Col, Input, Button, Icon, Form, DatePicker, InputNumber, Select, Alert
+    Layout, Menu, Breadcrumb, Row, Col, Input, Button, Icon, Form, DatePicker, InputNumber, Select, Alert,
+    Table, Divider, Tag
 } from 'antd';
 import "antd/dist/reset.css"
 import "./styles.css"
@@ -10,13 +12,92 @@ const { Header, Content, Footer } = Layout;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const Option = Select.Option;
 
+const placesList = ["AC", "AL", "AP", "AM", "BA", "CE",
+    "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RR", "RO",
+    "RJ", "RN", "RS", "SC", "SP", "SE", "TO"]
 // App's Main Page
 export default class Main extends Component {
 
+    state = {
+        hotelDataSource: [],
+        hotelColumns: [{
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+        }, {
+            title: 'State',
+            dataIndex: 'state',
+            key: 'state',
+        }, {
+            title: 'Stars',
+            dataIndex: 'stars',
+            key: 'stars',
+        }],
+        destination: "AP",
+        origin: "AC",
+        error: false,
+    }
 
+    generateDestOptions = () => {
+
+    }
     onChange = (e) => {
         console.log(e);
     };
+
+    handleChangeDestination = (value) => {
+
+        this.setState({
+            destination: value,
+        })
+    }
+
+    handleChangeOrigin = (value) => {
+
+        this.setState({
+            origin: value
+        })
+
+        console.log(this.state.origin)
+    }
+
+
+    makeRequest = async () => {
+
+        this.setState({ hotelDataSource: [] });
+
+        axios.get(`http://localhost:9090/hotel?location=${this.state.destination}`)
+            .then((response) => {
+
+
+                let hotel_list = response.data._embedded.hotelList
+
+                hotel_list.map(hotel => {
+                    let hotel_data = {
+                        key: hotel.id,
+                        name: "Hotel " + hotel.name,
+                        state: hotel.state,
+                        stars: hotel.stars
+                    }
+
+                    //console.log(hotel_data)
+                    //console.log(this.state.hotelsDataSource)
+                    this.setState({ hotelDataSource: [...this.state.hotelDataSource, hotel_data] })
+
+                    console.log(hotel_data);
+                })
+
+
+            })
+            .catch((error) => {
+
+            }).finally(() => {
+
+            }
+
+            );
+
+    }
 
     handleChange(value) {
         console.log(`selected ${value}`);
@@ -50,52 +131,31 @@ export default class Main extends Component {
                             <Row className="Search-Outter-Container" type="flex" justify="start" gutter={8}>
 
                                 <Col className="Col-Container" id="Package-Container" >
-                                Search the Package
+                                    Search the Package
                                 </Col>
                                 <Col >
                                     <Row type="flex" justify="center" gutter={8}>
                                         <Col className="Col-Container" >
-                                        Match
+                                            Match
                                         </Col>
                                         <Col className="Col-Container" >
                                             <Select
                                                 showSearch
-                                                size="medium"
+                                                size="default"
                                                 allowClear
                                                 emptyText="Oi"
                                                 placeholder="Local"
                                                 optionFilterProp="children"
-                                                onChange={this.onChange}
+                                                onChange={this.handleChangeOrigin}
                                                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                                                 defaultValue="AC"
                                                 style={{ width: 120 }}>
-                                                <Option value="AC">AC</Option>
-                                                <Option value="AL">AL</Option>
-                                                <Option value="AP">AP</Option>
-                                                <Option value="AM">AM</Option>
-                                                <Option value="BA">BA</Option>
-                                                <Option value="CE">CE</Option>
-                                                <Option value="DF">DF</Option>
-                                                <Option value="ES">ES</Option>
-                                                <Option value="GO">GO</Option>
-                                                <Option value="MA">MA</Option>
-                                                <Option value="MT">MT</Option>
-                                                <Option value="MS">MS</Option>
-                                                <Option value="MG">MG</Option>
-                                                <Option value="PA">PA</Option>
-                                                <Option value="PB">PB</Option>
-                                                <Option value="PR">PR</Option>
-                                                <Option value="PE">PE</Option>
-                                                <Option value="PI">PI</Option>
-                                                <Option value="RR">RR</Option>
-                                                <Option value="RO">RO</Option>
-                                                <Option value="RJ">RJ</Option>
-                                                <Option value="RN">RN</Option>
-                                                <Option value="RS">RS</Option>
-                                                <Option value="SC">SC</Option>
-                                                <Option value="SP">SP</Option>
-                                                <Option value="SE">SE</Option>
-                                                <Option value="TO">TO</Option>
+                                                {placesList.map(p => {
+                                                    if (this.state.destination === p)
+                                                        return (<Option key={p} disabled>{p}</Option>)
+                                                    else
+                                                        return (<Option key={p}>{p}</Option>)
+                                                })}
                                             </Select>
                                         </Col>
                                         <Col className="Col-Container" >
@@ -104,41 +164,20 @@ export default class Main extends Component {
                                         <Col className="Col-Container" >
                                             <Select
                                                 showSearch
-                                                size="medium"
+                                                size="default"
                                                 allowClear
                                                 placeholder="Local"
                                                 optionFilterProp="children"
-                                                onChange={this.onChange}
+                                                onChange={this.handleChangeOrigin}
                                                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                                                 defaultValue="AL"
                                                 style={{ width: 120 }}>
-                                                <Option value="AC">AC</Option>
-                                                <Option value="AL">AL</Option>
-                                                <Option value="AP">AP</Option>
-                                                <Option value="AM">AM</Option>
-                                                <Option value="BA">BA</Option>
-                                                <Option value="CE">CE</Option>
-                                                <Option value="DF">DF</Option>
-                                                <Option value="ES">ES</Option>
-                                                <Option value="GO">GO</Option>
-                                                <Option value="MA">MA</Option>
-                                                <Option value="MT">MT</Option>
-                                                <Option value="MS">MS</Option>
-                                                <Option value="MG">MG</Option>
-                                                <Option value="PA">PA</Option>
-                                                <Option value="PB">PB</Option>
-                                                <Option value="PR">PR</Option>
-                                                <Option value="PE">PE</Option>
-                                                <Option value="PI">PI</Option>
-                                                <Option value="RR">RR</Option>
-                                                <Option value="RO">RO</Option>
-                                                <Option value="RJ">RJ</Option>
-                                                <Option value="RN">RN</Option>
-                                                <Option value="RS">RS</Option>
-                                                <Option value="SC">SC</Option>
-                                                <Option value="SP">SP</Option>
-                                                <Option value="SE">SE</Option>
-                                                <Option value="TO">TO</Option>
+                                                {placesList.map(p => {
+                                                    if (this.state.destination === p)
+                                                        return (<Option key={p} disabled>{p}</Option>)
+                                                    else
+                                                        return (<Option key={p}>{p}</Option>)
+                                                })}
                                             </Select>
                                         </Col>
                                         <Col className="Col-Container">
@@ -154,14 +193,14 @@ export default class Main extends Component {
                                             <InputNumber min={1} max={10} defaultValue={1} onChange={this.onChange} />
                                         </Col>
                                         <Col className="Col-Container" id="End" >
-                                            <Button type="dashed" icon="search">Search</Button>
+                                            <Button type="dashed" icon="search" onClick={this.makeRequest}>Search</Button>
                                         </Col>
                                     </Row>
                                 </Col>
 
                             </Row>
-
-                            <Row id="Input-Alert">
+                            
+                           {this.state.error?<Row id="Input-Alert">
                                 <Alert
 
                                     message="Unable to find the searched package"
@@ -169,7 +208,11 @@ export default class Main extends Component {
                                     closable
                                     banner
                                     onClose={this.onClose}
-                                />
+                                /></Row> : ''}
+
+                                <Row id= "Hotel-Table">
+                  
+                                <Table dataSource={this.state.hotelDataSource} columns={this.state.hotelColumns} />
                             </Row>
                         </Col>
 
