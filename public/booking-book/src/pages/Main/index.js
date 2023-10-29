@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 import {
     Layout, Menu, Breadcrumb, Row, Col, Input, Button, Icon, Form, DatePicker, InputNumber, Select, Alert
 } from 'antd';
-import "antd/dist/antd.css";
+import "antd/dist/reset.css"
 import "./styles.css"
-import locale from 'antd/lib/date-picker/locale/pt_BR';
+import locale from 'antd/lib/date-picker/locale/en_US';
 const { Header, Content, Footer } = Layout;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const Option = Select.Option;
@@ -39,7 +39,7 @@ export default class Main extends Component {
                         defaultSelectedKeys={['2']}
                         style={{ lineHeight: '64px' }}
                     >
-                        <Menu.Item className="Menu-Item" key="1">Reservas</Menu.Item>
+                        <Menu.Item className="Menu-Item" key="1">Reservations</Menu.Item>
                     </Menu>
                 </Header>
                 <Content id="Main-Container">
@@ -50,12 +50,12 @@ export default class Main extends Component {
                             <Row className="Search-Outter-Container" type="flex" justify="start" gutter={8}>
 
                                 <Col className="Col-Container" id="Package-Container" >
-                                    Pesquise o Pacote
+                                Search the Package
                                 </Col>
                                 <Col >
                                     <Row type="flex" justify="center" gutter={8}>
                                         <Col className="Col-Container" >
-                                            Partida
+                                        Match
                                         </Col>
                                         <Col className="Col-Container" >
                                             <Select
@@ -99,7 +99,7 @@ export default class Main extends Component {
                                             </Select>
                                         </Col>
                                         <Col className="Col-Container" >
-                                            Destino
+                                            Destination
                                         </Col>
                                         <Col className="Col-Container" >
                                             <Select
@@ -142,19 +142,19 @@ export default class Main extends Component {
                                             </Select>
                                         </Col>
                                         <Col className="Col-Container">
-                                            Período
+                                            Period
                                         </Col>
                                         <Col className="Col-Container" >
                                             <RangePicker locale={locale} onChange={this.onChange} />
                                         </Col>
                                         <Col className="Col-Container" >
-                                            Qtde. Hóspedes
+                                            No. of Passengers
                                         </Col>
                                         <Col className="Col-Container" >
                                             <InputNumber min={1} max={10} defaultValue={1} onChange={this.onChange} />
                                         </Col>
                                         <Col className="Col-Container" id="End" >
-                                            <Button type="dashed" icon="search">Buscar</Button>
+                                            <Button type="dashed" icon="search">Search</Button>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -164,7 +164,7 @@ export default class Main extends Component {
                             <Row id="Input-Alert">
                                 <Alert
 
-                                    message="Não foi possível encontrar o pacote pesquisado"
+                                    message="Unable to find the searched package"
                                     type="error"
                                     closable
                                     banner
@@ -177,7 +177,7 @@ export default class Main extends Component {
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
-                    Booking App ©2019 Created by David
+                    Booking App 2023 Created by Sukhvinder
                 </Footer>
             </Layout>
         )
