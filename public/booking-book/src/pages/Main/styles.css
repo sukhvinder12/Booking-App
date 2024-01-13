@@ -4,10 +4,10 @@
     height: 100%;
 }
 #Header{
-    background-color: #1890ff;
+    background-color: #f58a5f;
 }
 #Menu{
-    background-color: #1890ff;
+    background-color: #f58a5f;
     color: white;
 }
 #Main-Container{
@@ -18,7 +18,7 @@
 .Menu-Item{
 }
 .Search-Inner-Container{
-    background-color: white;
+    background-color: #020202;
     min-height: 60px;
     padding: 0 20px;
 }

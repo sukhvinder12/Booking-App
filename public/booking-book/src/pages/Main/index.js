@@ -12,9 +12,8 @@ const { Header, Content, Footer } = Layout;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const Option = Select.Option;
 
-const placesList = ["AC", "AL", "AP", "AM", "BA", "CE",
-    "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RR", "RO",
-    "RJ", "RN", "RS", "SC", "SP", "SE", "TO"]
+const placesList = ["Chamba", "Hamirpur", "Lahaul and Spiti", "Mandi", 'Shimla', "Bilaspur", "Kinnaur",
+    'Simraur', "Kullu", "Kangra", "Solan", "Una"]
 // App's Main Page
 export default class Main extends Component {
 
@@ -120,7 +119,7 @@ export default class Main extends Component {
                         defaultSelectedKeys={['2']}
                         style={{ lineHeight: '64px' }}
                     >
-                        <Menu.Item className="Menu-Item" key="1">Reservations</Menu.Item>
+                        <Menu.Item className="Menu-Item" key="1">Booking</Menu.Item>
                     </Menu>
                 </Header>
                 <Content id="Main-Container">
@@ -148,7 +147,7 @@ export default class Main extends Component {
                                                 optionFilterProp="children"
                                                 onChange={this.handleChangeOrigin}
                                                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                                                defaultValue="AC"
+                                                defaultValue="Chamba"
                                                 style={{ width: 120 }}>
                                                 {placesList.map(p => {
                                                     if (this.state.destination === p)
@@ -170,7 +169,7 @@ export default class Main extends Component {
                                                 optionFilterProp="children"
                                                 onChange={this.handleChangeOrigin}
                                                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                                                defaultValue="AL"
+                                                defaultValue="Una"
                                                 style={{ width: 120 }}>
                                                 {placesList.map(p => {
                                                     if (this.state.destination === p)
@@ -199,8 +198,8 @@ export default class Main extends Component {
                                 </Col>
 
                             </Row>
-                            
-                           {this.state.error?<Row id="Input-Alert">
+
+                            {this.state.error ? <Row id="Input-Alert">
                                 <Alert
 
                                     message="Unable to find the searched package"
@@ -210,8 +209,8 @@ export default class Main extends Component {
                                     onClose={this.onClose}
                                 /></Row> : ''}
 
-                                <Row id= "Hotel-Table">
-                  
+                            <Row id="Hotel-Table">
+
                                 <Table dataSource={this.state.hotelDataSource} columns={this.state.hotelColumns} />
                             </Row>
                         </Col>
