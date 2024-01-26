@@ -1,73 +1,48 @@
 #Page {
-    background: #F0F2F5;
     height: 100%;
+    background-color: #f0f2f5;
+    width: 100%;
 }
 
-#Header {
-    background-color: #f58a5f;
-}
-
-#Menu {
-    background-color: #f58a5f;
-    color: white;
+#Layout {
+    height: 100%;
+    width: 100%;
 }
 
 #Main-Container {
     padding: 20px 100px;
     height: 100%;
+    width: 100%;
+    display: block;
 }
 
-.Menu-Item {
-    font-size: x-large;
+#Main-Container-Image {
+    padding: 20px 100px;
+    height: 100%;
+    width: 100%;
+    display: block;
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
+    /* Resize the background image to cover the entire container */
+    background-image: url("../../assets/background_grey.jpg");
+    ;
 }
 
-.Search-Inner-Container {
-    background-color: #020202;
-    min-height: 60px;
-    padding: 0 20px;
-}
-
-.Search-Outter-Container {
-
-    min-height: 60px;
-    align-items: center;
-    width: 1360px;
-    background-color: white;
-
-
-}
-
-#Hotel-Table {
-    min-height: 60px;
-    align-items: center;
-    width: 1360px;
-    background-color: white;
-    margin-top: 40px;
-}
-
-.Col-Container {
-    text-align: center;
-    background-color: white;
-    min-height: 60px;
-    line-height: 60px;
-    color: #262626;
-
+#Top-Container {
+    margin: 1% 0;
+    height: 10%;
+    width: 90%;
+    -moz-box-shadow: 0 0 5px 2px rgba(0, 0, 0, .35);
+    -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, .35);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .35);
 
 }
 
 #List-Header {
-    font-weight: 600
-}
-
-#Package-Container {
-    min-height: 60px;
-    line-height: 60px;
-    min-width: 200px;
     font-weight: 600;
-    border-right: solid;
-    border-width: 2px;
-    border-color: #1890ff;
-    margin-right: 20px;
 }
 
 .Column {
@@ -78,8 +53,6 @@
     width: 1360px;
 }
 
-.Hotel-List-Container {}
-
 .Hotel-List-Item-Row {
     width: 100%;
     height: 40px;
@@ -87,11 +60,22 @@
 
 .Hotel-List-Item-Col-Stars {
     flex-basis: 10%;
-
 }
 
 .Hotel-List-Item-Col-Name {
     flex-basis: 30%;
+}
+
+.Hotel-List-Item-Col-Code {
+    flex-basis: 20%;
+}
+
+.List-Item-Col-Company {
+    flex-basis: 25%;
+}
+
+.List-Item-Col-Departure {
+    flex-basis: 15%;
 }
 
 .Hotel-List-Item-Col-Location {
@@ -102,17 +86,7 @@
     flex-basis: 30%;
 }
 
-#Steps-Row {
-    margin-top: 20px;
-    width: 1360px;
-}
-
-#Steps-Col {
-    flex-basis: 50%;
-    margin: 0 0;
-    padding: 0 0;
-}
-
-#List {
-    height: 560px;
+#Content-Container {
+    height: 100%;
+    width: 100%;
 }
